@@ -1,0 +1,15 @@
+database:
+    host: ./dev.db
+server:
+    port: 8080
+    allow_origin: ["*"]
+log:
+    level: debug
+    path: ./app.log
+    rotation:
+        max_size: 10
+        max_backups: 3
+        max_age: 7
+    orm_log_level: 4 # 1=silent, 2=error, 3=warn, 4=info
+test:
+    flush: false
