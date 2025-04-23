@@ -11,20 +11,20 @@ Replace module name in go.mod, then tidy.
 linux bash
 
 ```bash
-sed -i 's|github.com/blacksheepaul/templateToGo|"your_module_name"|g' go.mod
-find . -name '*.go' -exec sed -i 's|github.com/blacksheepaul/templateToGo|"your_module_name"|g' {} \;
+sed -i 's|github.com/blacksheepaul/templateToGo|your_module_name|g' go.mod
+find . -name '*.go' -exec sed -i 's|github.com/blacksheepaul/templateToGo|your_module_name|g' {} \;
 ```
 
 macOS
 ```bash
-sed -i '' 's|github.com/blacksheepaul/templateToGo|"your_module_name"|g' go.mod
-find . -name '*.go' -exec sed -i '' 's|github.com/blacksheepaul/templateToGo|"your_module_name"|g' {} \;
+sed -i '' 's|github.com/blacksheepaul/templateToGo|your_module_name|g' go.mod
+find . -name '*.go' -exec sed -i '' 's|github.com/blacksheepaul/templateToGo|your_module_name|g' {} \;
 ```
 
 fish shell
 ```bash
-sed -i -e 's|github.com/blacksheepaul/templateToGo|"your_module_name"|g' go.mod
-find . -name '*.go' -exec sed -i -e 's|github.com/blacksheepaul/templateToGo|"your_module_name"|g' {} \;
+sed -i -e 's|github.com/blacksheepaul/templateToGo|your_module_name|g' go.mod
+find . -name '*.go' -exec sed -i -e 's|github.com/blacksheepaul/templateToGo|your_module_name|g' {} \;
 ```
 
 then
