@@ -21,11 +21,47 @@ var (
 	log  logger.Logger
 )
 
+type DBProvider interface {
+	Db() *gorm.DB
+}
+
 type Dao struct {
 	db    *gorm.DB
 	RawDB *sql.DB
 	cache *cache.Cache
 }
+
+func (d *Dao) Db() *gorm.DB {
+	return d.db
+}
+
+func (d *Dao) Begin() *TxDao {
+	tx := d.db.Begin()
+	if tx.Error != nil {
+		panic(tx.Error)
+	}
+	return &TxDao{Dao: d, txDb: tx}
+}
+
+type TxDao struct {
+	*Dao
+	txDb *gorm.DB
+}
+
+func (tx *TxDao) Db() *gorm.DB {
+	return tx.txDb
+}
+
+func (tx *TxDao) Commit() error {
+	return tx.txDb.Commit().Error
+}
+
+func (tx *TxDao) Rollback() error {
+	return tx.txDb.Rollback().Error
+}
+
+var _ DBProvider = (*Dao)(nil)
+var _ DBProvider = (*TxDao)(nil)
 
 func InitDao(cfg *config.Config, loggerInstance logger.Logger) {
 	once.Do(func() {
