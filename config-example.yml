@@ -2,7 +2,7 @@ database:
     host: ./dev.db
 server:
     port: 8080
-    allow_origin:
+    allow_origins:
         - "*"
 log:
     level: debug
